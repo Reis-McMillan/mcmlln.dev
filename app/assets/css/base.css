@@ -5,6 +5,6 @@
   }
 
   html {
-    @apply bg-gray-900 text-white antialiased;
+    @apply bg-[#0d0d0d] text-[#00ff41] font-mono antialiased;
   }
 }

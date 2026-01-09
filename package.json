@@ -7,7 +7,6 @@
     "dev": "nuxt dev",
     "lint": "npx stylelint ./app/assets/css/**/*.css --fix && npx stylelint ./app/{components,pages,layouts}/**/*.vue --fix && eslint . --fix",
     "postinstall": "nuxt prepare",
-    "typecheck": "npx nuxi typecheck .",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -26,6 +25,7 @@
     "@nuxt/image": "^1.11.0",
     "@tailwindcss/vite": "^4.1.17",
     "@vueuse/nuxt": "^13.9.0",
+    "gsap": "^3.14.2",
     "nuxt-security": "^2.4.0",
     "reka-ui": "^2.6.0",
     "tailwind-merge": "^3.4.0",
