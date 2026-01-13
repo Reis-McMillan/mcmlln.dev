@@ -1,15 +1,17 @@
 <template>
   <div>
-    <TerminalHeader @finished="isTyped = true" />
-    
+    <TerminalHeader @finished="doneTyping" />
+
     <main v-if="isTyped" class="page-content">
       <slot />
     </main>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script setup lang="ts">
+const isTyped = shallowRef(false);
 
-const isTyped = ref(false)
+const doneTyping = () => {
+  isTyped.value = true;
+};
 </script>

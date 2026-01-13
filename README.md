@@ -5,6 +5,7 @@
 A modern Nuxt starter template packed with essential features and best practices.
 
 This template serves as a future-proof foundation for your projects, allowing you to:
+
 - Leverage Nuxt 4 features
 - Use the latest Tailwind CSS v4 capabilities
 - Follow best practices and modern development patterns
@@ -20,7 +21,7 @@ This template serves as a future-proof foundation for your projects, allowing yo
 - [x] [Reka UI](https://reka-ui.com) Unstyled, accessible components for building high‑quality design systems and web apps
 - [x] [Nuxt Icons](https://nuxt.com/modules/icon)
 - [x] [Nuxt Image](https://image.nuxt.com/) A drop-in replacement for the native <img> tag.
-- [x] [Nuxt Fonts](https://fonts.nuxt.com/) Plug-and-play web font optimization and configuration 
+- [x] [Nuxt Fonts](https://fonts.nuxt.com/) Plug-and-play web font optimization and configuration
 - [x] [Security](https://nuxt-security.vercel.app/)
 
 ### 👉 Code quality and conventions
@@ -31,6 +32,7 @@ This template serves as a future-proof foundation for your projects, allowing yo
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js (v22.0.0 or newer)
 - npm (v10.9.0 or newer)
 

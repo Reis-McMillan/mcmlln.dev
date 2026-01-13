@@ -4,13 +4,9 @@ interface Props {
 }
 const props = defineProps<Props>();
 
-const message = computed(() =>
-  String(props.error?.statusMessage || "An error occurred")
-);
+const message = computed(() => String(props.error?.statusMessage || "An error occurred"));
 const statusCode = computed(() => props.error?.statusCode || 500);
-const is404 = computed(
-  () => statusCode.value === 404 || message.value?.includes("404")
-);
+const is404 = computed(() => statusCode.value === 404 || message.value?.includes("404"));
 const genericMessage = computed(() =>
   is404.value
     ? "Looks like you've followed a broken link or entered a URL that doesn't exist on this site."

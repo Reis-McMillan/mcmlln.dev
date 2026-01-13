@@ -5,8 +5,10 @@
   </header>
 </template>
 
-<script setup>
-const emit = defineEmits(["finished"])
+<script setup lang="ts">
+const emit = defineEmits<{
+  finished: [];
+}>();
 
 const name = "./reis ";
 const displayedText = ref("");
@@ -20,7 +22,7 @@ onMounted(() => {
       i++;
     } else {
       clearInterval(timer);
-      emit("finished")
+      emit("finished");
     }
   }, typeSpeed);
 });
@@ -28,6 +30,9 @@ onMounted(() => {
 
 <style scoped>
 .terminal-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   padding: 1rem;
   font-size: 3rem;
 }
@@ -35,7 +40,7 @@ onMounted(() => {
 .cursor {
   display: inline-block;
   /* Adjust width/height to match your font's character size */
-  width: 1.8rem; 
+  width: 1.8rem;
   height: 3rem;
   background-color: currentColor; /* Inherits your text color */
 }
