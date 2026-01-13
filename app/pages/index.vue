@@ -100,38 +100,36 @@ onMounted(() => {
       ScrollTrigger.create({
         trigger: container,
         start: "top 120px",
-        end: "+=500vh",
+        end: "+=400vh",
         pin: true,
         pinSpacing: true,
         markers: true,
       });
 
-      // Animate each card's height based on scroll progress
+      // Create a timeline for all card animations
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top 120px",
+          end: "+=400vh",
+          scrub: 1,
+          markers: true,
+        },
+      });
+
+      // Add each card animation to the timeline
       cards.forEach((card, index) => {
         if (index === cards.length - 1) return; // Skip last card
 
-        ScrollTrigger.create({
-          trigger: container,
-          start: "top 120px",
-          end: "+=500vh",
-          onUpdate: (self) => {
-            const progress = self.progress;
-            const cardStart = index * 0.2; // Each card gets 20% of total scroll
-            const cardEnd = (index + 1) * 0.2;
+        const startHeight = card.scrollHeight;
+        const endHeight = 88;
 
-            if (progress >= cardStart && progress <= cardEnd) {
-              const cardProgress = (progress - cardStart) / 0.2;
-              const currentHeight = card.scrollHeight;
-              const targetHeight = 88;
-              const newHeight =
-                currentHeight - (currentHeight - targetHeight) * cardProgress;
-              card.style.height = `${newHeight}px`;
-            } else if (progress > cardEnd) {
-              card.style.height = "88px";
-            }
-          },
-          markers: true,
-        });
+        tl.fromTo(
+          card,
+          { height: startHeight },
+          { height: endHeight, ease: "none" },
+          index * 1 // Each animation starts 1 second apart in timeline
+        );
       });
     }, 100);
   }
