@@ -1,35 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
 @import "tailwindcss";
 @import "./base.css";
 @import "./transition.css";
 @import "./utilities.css";
-
-@theme {
-  /* Font */
-  --font-*: initial;
-  --font-sans: "Inter", sans-serif;
-  --font-mono:
-    "JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas",
-    "Liberation Mono", "Courier New", "monospace";
-
-  /* Base Colors */
-  --color-*: initial;
-  --color-white: #fff;
-  --color-black: #000;
-
-  /* Gray Colors */
-  --color-gray-50: #f2f2f2;
-  --color-gray-100: #ededed;
-  --color-gray-200: #e0e0e0;
-  --color-gray-300: #d4d4d4;
-  --color-gray-400: #c4c4c4;
-  --color-gray-500: #b3b3b3;
-  --color-gray-600: #a1a1a1;
-  --color-gray-700: #8a8a8a;
-  --color-gray-800: #6b6b6b;
-  --color-gray-900: #404040;
-  --color-gray-950: #000;
-}
 
 @layer components {
   .card {
