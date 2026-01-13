@@ -3,11 +3,16 @@ import { onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { TextPlugin } from 'gsap/TextPlugin'
 
+const emit = defineEmits(['ready'])
+
 onMounted(() => {
   if (process.client) {
     gsap.registerPlugin(TextPlugin)
     
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+      // Refresh ScrollTrigger positions as the container expands
+      onComplete: () => emit('ready')
+    });
 
     tl.to(".paragraph1", {
       duration: 3,
