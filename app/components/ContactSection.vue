@@ -49,7 +49,7 @@
         <Icon name="mdi:linkedin" size="20" />
       </a>
       <a
-        href="mailto:reis@example.com"
+        href="mailto:reismcmillan@gmail.com"
         class="flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-800 px-4 py-2 text-sm font-medium text-gray-300 transition-all hover:border-green-500/50 hover:bg-gray-700 hover:text-white"
       >
         <Icon name="mdi:email-outline" size="20" />
