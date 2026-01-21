@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-const emit = defineEmits(["finished"])
+const emit = defineEmits(["finished"]);
 
 const name = "./reis ";
 const displayedText = ref("");
@@ -20,7 +20,7 @@ onMounted(() => {
       i++;
     } else {
       clearInterval(timer);
-      emit("finished")
+      emit("finished");
     }
   }, typeSpeed);
 });
@@ -34,9 +34,10 @@ onMounted(() => {
 
 .cursor {
   display: inline-block;
+
   /* Adjust width/height to match your font's character size */
-  width: 1.8rem; 
+  width: 1.8rem;
   height: 3rem;
-  background-color: currentColor; /* Inherits your text color */
+  background-color: currentcolor; /* Inherits your text color */
 }
 </style>

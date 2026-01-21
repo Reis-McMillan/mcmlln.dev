@@ -39,9 +39,9 @@ export default defineNuxtConfig({
     head: {
       title: "Reis McMillan",
       titleTemplate: "%s - Reis McMillan",
-      link: [{ 
-        rel: "icon", 
-        href: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+      link: [{
+        rel: "icon",
+        href: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%2318181b%22 width=%22100%22 height=%22100%22 rx=%228%22/><text x=%2250%22 y=%2272%22 font-family=%22monospace%22 font-size=%2270%22 font-weight=%22bold%22 fill=%22%2322c55e%22 text-anchor=%22middle%22>r</text></svg>"
     }],
     },
     rootAttrs: {
@@ -60,4 +60,19 @@ export default defineNuxtConfig({
     strict: true,
   },
   telemetry: false,
+  security: {
+    headers: {
+      crossOriginEmbedderPolicy: false,
+    },
+  },
+  routeRules: {
+    '/resume.pdf': {
+      security: {
+        headers: {
+          contentSecurityPolicy: false,
+          crossOriginEmbedderPolicy: false,
+        },
+      },
+    },
+  },
 });

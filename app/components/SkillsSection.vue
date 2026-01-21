@@ -1,78 +1,43 @@
 <template>
-  <section 
-    id="skills" 
-    class="space-y-6 overflow-hidden bg-[#1a1a1a] border
-     border-gray-800 rounded-xl p-6 shadow-2xl backdrop-blur-md"
+  <section
+    id="skills"
+    class="jelly-section space-y-6 overflow-hidden rounded-xl border border-gray-800 bg-[#1a1a1a] p-6 shadow-2xl backdrop-blur-md"
   >
-    <h2 class="text-2xl font-bold flex">
-      <span class="mr-2">></span> Skills
+    <h2 class="flex text-2xl font-bold">
+      <span class="mr-2">></span>
+      Skills
     </h2>
-
-    <TransitionGroup 
-      name="category-slide" 
-      tag="div" 
-      appear
-      class="space-y-12"
+    <div
+      v-for="(category, cIndex) in skillCategories"
+      :key="category.title"
+      class="space-y-4"
+      :style="{ '--c-delay': cIndex }"
     >
-      <div 
-        v-for="(category, cIndex) in skillCategories" 
-        :key="category.title" 
-        class="space-y-4"
-        :style="{ '--c-delay': cIndex }"
+      <h3
+        class="border-b border-gray-800 pb-2 text-sm tracking-widest text-gray-500 uppercase"
       >
-        <h3 class="text-sm text-gray-500 uppercase tracking-widest border-b border-gray-800 pb-2">
-          {{ category.title }}
-        </h3>
-        
-        <TransitionGroup 
-          name="skill-pop" 
-          tag="div" 
-          appear
-          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4"
+        {{ category.title }}
+      </h3>
+
+      <div class="flex flex-wrap gap-2">
+        <div
+          v-for="(skill, sIndex) in category.skills"
+          :key="skill.name"
+          class="skill-card group w-36 rounded border border-gray-800 bg-gray-900/50 p-3 text-center transition-all hover:scale-105 hover:border-green-500/50 hover:bg-gray-800/70"
+          :style="{ '--s-delay': sIndex }"
         >
-          <div 
-            v-for="(skill, sIndex) in category.skills" 
-            :key="skill.name" 
-            class="skill-card p-3 border border-gray-800 bg-gray-900/50 rounded hover:border-green-500/50 transition-all group text-center"
-            :style="{ '--s-delay': sIndex }"
-          >
-            <Icon v-if="skill.icon" :name="skill.icon" class="mb-2 text-gray-500 group-hover:text-green-400 transition-colors" size="24" />
-            <div class="text-xs text-gray-300">{{ skill.name }}</div>
-          </div>
-        </TransitionGroup>
+          <Icon
+            v-if="skill.icon"
+            :name="skill.icon"
+            class="mb-2 text-gray-500 transition-all group-hover:text-green-400 group-hover:brightness-125"
+            size="24"
+          />
+          <div class="text-xs text-gray-300">{{ skill.name }}</div>
+        </div>
       </div>
-    </TransitionGroup>
+    </div>
   </section>
 </template>
-
-<style scoped>
-/* 1. Category Slide: Slides down and fades in from the header point */
-.category-slide-enter-active {
-  transition: all 0.6s ease-out;
-  transition-delay: calc(var(--c-delay) * 0.2s);
-}
-.category-slide-enter-from {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-
-/* 2. Skill Pop: Slides right and down from the top-left of the category */
-.skill-pop-enter-active {
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy effect */
-  /* This combines the category delay + the individual skill delay */
-  transition-delay: calc((var(--c-delay) * 0.3s) + (var(--s-delay) * 0.05s));
-}
-
-.skill-pop-enter-from {
-  opacity: 0;
-  transform: translate(-30px, -10px) scale(0.9);
-}
-
-/* Optional: Smooth movement if items change order */
-.skill-pop-move {
-  transition: transform 0.4s ease;
-}
-</style>
 
 <script setup>
 const skillCategories = [
@@ -87,8 +52,8 @@ const skillCategories = [
       { name: "Pandas", icon: "logos:pandas-icon" },
       { name: "Snowflake", icon: "logos:snowflake-icon" },
       { name: "R", icon: "logos:r-lang" },
-      { name: "ROCm", icon: "logos:amd"}
-    ]
+      { name: "ROCm", icon: "logos:amd" },
+    ],
   },
   {
     title: "Cloud Infrastructure & Deployment",
@@ -98,8 +63,8 @@ const skillCategories = [
       { name: "Ansible", icon: "mdi:ansible" },
       { name: "Docker", icon: "logos:docker-icon" },
       { name: "Bash", icon: "logos:bash-icon" },
-      { name: "Git", icon: "logos:git-icon" } 
-    ]
+      { name: "Git", icon: "logos:git-icon" },
+    ],
   },
   {
     title: "Software & Web Development",
@@ -110,8 +75,8 @@ const skillCategories = [
       { name: "MongoDB", icon: "logos:mongodb-icon" },
       { name: "JavaScript", icon: "logos:javascript" },
       { name: "Java", icon: "logos:java" },
-      { name: "Nuxt", icon: "logos:nuxt"}
-    ]
-  }
-]
+      { name: "Nuxt", icon: "logos:nuxt" },
+    ],
+  },
+];
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <TerminalHeader @finished="isTyped = true" />
-    
+
     <main v-if="isTyped" class="page-content">
       <slot />
     </main>
@@ -9,7 +9,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from "vue";
 
-const isTyped = ref(false)
+const isTyped = ref(false);
+const { init, destroy } = useLenis();
+
+onMounted(() => {
+  init();
+});
+
+onUnmounted(() => {
+  destroy();
+});
 </script>

@@ -6,3 +6,10 @@
   padding-inline: 2rem;
   margin-inline: auto;
 }
+
+/* Jelly scroll sections */
+.jelly-section {
+  transform-origin: center center;
+  transition: transform 0.05s linear;
+  will-change: transform;
+}
