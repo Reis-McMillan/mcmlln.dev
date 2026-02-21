@@ -4,24 +4,15 @@
     ref="sectionRef"
     class="flex min-h-[300px] flex-col items-center justify-center overflow-hidden p-6 font-mono"
   >
-    <!-- Rolling Letters -->
-    <div class="relative mb-8 flex h-16 justify-center">
-      <span
-        v-for="(letter, i) in letters"
-        :key="i"
-        class="inline-block text-4xl font-bold transition-all duration-700 ease-out md:text-5xl"
-        :class="letter.char === ' ' ? 'w-4' : ''"
-        :style="{
-          transform: isAnimating
-            ? `translateX(${letter.startX}px) rotate(${letter.rotation}deg)`
-            : 'translateX(0) rotate(0deg)',
-          opacity: isAnimating ? 0 : 1,
-          transitionDelay: `${letter.delay}ms`,
-          color: letter.char === '?' ? '#00ff41' : '#e5e5e5',
-        }"
-      >
-        {{ letter.char }}
+    <!-- Typed Text -->
+    <div class="relative mb-8 flex h-16 items-center justify-center">
+      <span class="text-4xl font-bold text-neutral-200 md:text-5xl">
+        {{ displayedText }}
       </span>
+      <span
+        v-if="hasTriggered"
+        class="ml-0.5 inline-block h-10 w-5 bg-current text-neutral-200 md:h-12 md:w-6"
+      ></span>
     </div>
 
     <!-- Contact Buttons -->
@@ -60,28 +51,27 @@
 
 <script setup>
 const sectionRef = ref(null);
-const isAnimating = ref(true);
+const displayedText = ref("");
 const showButtons = ref(false);
 const hasTriggered = ref(false);
 
 const text = "Contact Me?";
-const letters = text.split("").map((char, i, arr) => ({
-  char,
-  startX: -600 - (arr.length - 1 - i) * 30,
-  rotation: -720 - (arr.length - 1 - i) * 45,
-  delay: (arr.length - 1 - i) * 50,
-}));
+const typeSpeed = 150;
 
 function triggerAnimation() {
   if (hasTriggered.value) return;
   hasTriggered.value = true;
 
-  isAnimating.value = false;
-
-  const totalDuration = letters.length * 50 + 700;
-  setTimeout(() => {
-    showButtons.value = true;
-  }, totalDuration);
+  let i = 0;
+  const timer = setInterval(() => {
+    if (i < text.length) {
+      displayedText.value += text.charAt(i);
+      i++;
+    } else {
+      clearInterval(timer);
+      showButtons.value = true;
+    }
+  }, typeSpeed);
 }
 
 onMounted(() => {

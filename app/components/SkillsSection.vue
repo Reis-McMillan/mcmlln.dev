@@ -23,13 +23,13 @@
         <div
           v-for="(skill, sIndex) in category.skills"
           :key="skill.name"
-          class="skill-card group w-36 rounded border border-gray-800 bg-gray-900/50 p-3 text-center transition-all hover:scale-105 hover:border-green-500/50 hover:bg-gray-800/70"
+          class="skill-card group w-24 rounded border border-gray-800 bg-gray-900/50 p-2 text-center transition-all hover:scale-105 hover:border-green-500/50 hover:bg-gray-800/70 sm:w-36 sm:p-3"
           :style="{ '--s-delay': sIndex }"
         >
           <Icon
             v-if="skill.icon"
             :name="skill.icon"
-            class="mb-2 text-gray-500 transition-all group-hover:text-green-400 group-hover:brightness-125"
+            class="skill-icon mb-1 text-gray-500 transition-all group-hover:text-green-400 group-hover:brightness-125 sm:mb-2"
             size="24"
           />
           <div class="text-xs text-gray-300">{{ skill.name }}</div>
@@ -80,3 +80,17 @@ const skillCategories = [
   },
 ];
 </script>
+
+<style scoped>
+.skill-icon {
+  width: 18px;
+  height: 18px;
+}
+
+@media (width >= 640px) {
+  .skill-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+</style>

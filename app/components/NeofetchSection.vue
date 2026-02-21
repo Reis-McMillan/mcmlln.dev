@@ -3,7 +3,7 @@
     <div class="flex flex-col gap-4 md:flex-row md:gap-8">
       <!-- ASCII Logo -->
       <pre
-        class="shrink-0 text-xs leading-tight md:text-sm"
+        class="shrink-0 text-[0.45rem] leading-tight sm:text-xs md:text-sm"
         :style="{ color: logoColor }"
       ><template v-for="(line, i) in displayedLogoLines" :key="i">{{ line }}
 </template></pre>
