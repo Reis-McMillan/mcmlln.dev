@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-const { hasRole } = useAuth();
+const { hasRole, checkAuth } = useAuth();
 const canManage = computed(() => hasRole("admin") || hasRole("coin-manager"));
 
 const coins = ref([]);
@@ -47,6 +47,7 @@ async function fetchCoins() {
 }
 
 onMounted(() => {
+  checkAuth();
   fetchCoins();
 });
 </script>

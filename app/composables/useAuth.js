@@ -11,7 +11,11 @@ export function useAuth() {
   const isAuthenticated = computed(() => !!validateJwt(jwt.value));
 
   async function checkAuth() {
-    if (validateJwt(jwt.value)) return true;
+    const decoded = validateJwt(jwt.value);
+    if (decoded) {
+      identity.value = decoded;
+      return true;
+    }
 
     try {
       const headers = import.meta.server ? useRequestHeaders(["cookie"]) : {};
