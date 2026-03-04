@@ -49,6 +49,8 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    ssoBaseUrl: process.env.SSO_BASE_URL || "https://sso.mcmlln.dev",
+    coinMonsterUrl: process.env.COIN_MONSTER_URL || "https://coin-monster.mcmlln.dev",
     public: {
       buildAt: new Date().toLocaleString("en-US", {
         timeZone: "America/New_York",

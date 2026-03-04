@@ -32,7 +32,9 @@ useHead({
       <p class="mb-12">
         {{ genericMessage }}
       </p>
-      <AppButton to="/">Go back home</AppButton>
+      <NuxtLink to="/" class="text-[#00ff41] hover:underline">
+        Go back home
+      </NuxtLink>
       <LocalDevOnly>
         {{ props.error }}
       </LocalDevOnly>
