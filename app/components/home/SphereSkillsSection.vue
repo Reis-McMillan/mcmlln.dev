@@ -340,11 +340,11 @@ onBeforeUnmount(() => {
         </h2>
         <p class="engraved">{{ description }}</p>
       </div>
-      <div class="relative mt-3 hidden h-48 sm:block">
+      <div class="relative mt-3 h-48">
         <Transition name="fade">
           <div
             v-if="hoveredSkill"
-            :key="`desktop-${hoveredSkill.name}`"
+            :key="hoveredSkill.name"
             class="glass-pane detail-pane"
           >
             <h3
@@ -358,26 +358,6 @@ onBeforeUnmount(() => {
           </div>
         </Transition>
       </div>
-    </div>
-    <div
-      class="absolute right-12 bottom-12 left-12 z-20 mx-auto h-50 max-w-2xl sm:hidden"
-    >
-      <Transition name="fade">
-        <div
-          v-if="hoveredSkill"
-          :key="hoveredSkill.name"
-          class="glass-pane detail-pane"
-        >
-          <h3
-            class="engraved relative mb-2 inline-block px-3 py-1 text-xl font-thin before:absolute before:top-0 before:left-0 before:h-3 before:w-3 before:rounded-tl-md before:border-t-2 before:border-l-2 before:border-[#DD6031] before:content-[''] after:absolute after:right-0 after:bottom-0 after:h-3 after:w-3 after:rounded-br-md after:border-r-2 after:border-b-2 after:border-[#DD6031] after:content-['']"
-          >
-            {{ hoveredSkill.name }}
-          </h3>
-          <p class="engraved mt-1 text-sm">
-            {{ hoveredSkill.description }}
-          </p>
-        </div>
-      </Transition>
     </div>
     <div
       v-for="(skill, i) in icons"

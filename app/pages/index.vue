@@ -219,7 +219,7 @@ const WEB_SKILLS = [
     />
     <div
       aria-hidden="true"
-      class="pointer-events-none h-[350vh] md:h-[600vh]"
+      class="pointer-events-none h-[500vh] md:h-[600vh]"
     />
     <HomeProjectsSection :scroll-start="50" :scroll-end="80" />
     <div

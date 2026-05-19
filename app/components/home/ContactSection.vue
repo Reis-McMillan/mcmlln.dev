@@ -38,7 +38,7 @@ onBeforeUnmount(() => {
   >
     <h2
       ref="headingRef"
-      class="text-5xl font-thin tracking-tight text-[#F2F4F3] sm:text-6xl"
+      class="text-center text-5xl font-thin tracking-tight text-[#F2F4F3] sm:text-6xl"
     >
       Want to reach out?
     </h2>

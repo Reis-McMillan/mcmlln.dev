@@ -29,8 +29,8 @@ const SPHERE_LOOK = new THREE.Vector3(-60, 0, 0);
 
 const END_CAMERA_MOBILE = new THREE.Vector3(30, 40, 70);
 const END_LOOK_MOBILE = new THREE.Vector3(30, 30, 0);
-const SPHERE_CAMERA_MOBILE = new THREE.Vector3(0, 50, 320);
-const SPHERE_LOOK_MOBILE = new THREE.Vector3(0, 50, 0);
+const SPHERE_CAMERA_MOBILE = new THREE.Vector3(0, 55, 320);
+const SPHERE_LOOK_MOBILE = new THREE.Vector3(0, 55, 0);
 const SHRINK_CAMERA_MOBILE = new THREE.Vector3(0, 0, 340);
 const SHRINK_LOOK_MOBILE = new THREE.Vector3(0, 0, 0);
 const UNFURL_CAMERA_MOBILE = new THREE.Vector3(0, 100, 320);
