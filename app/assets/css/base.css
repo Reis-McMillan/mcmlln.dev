@@ -5,6 +5,34 @@
   }
 
   html {
-    @apply bg-[#0d0d0d] font-mono text-[#00ff41] antialiased;
+    @apply bg-[#040303] font-mono antialiased;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-[#DD6031];
+
+    font-family: "Share Tech Mono", ui-monospace, monospace;
+  }
+
+  p,
+  li {
+    @apply text-[#F2F4F3];
+
+    font-family: "SUSE Mono", ui-monospace, monospace;
+  }
+}
+
+/* Hide native scrollbar — replaced by the custom Vue scrollbar overlay. */
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }

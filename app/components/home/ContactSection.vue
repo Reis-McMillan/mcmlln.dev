@@ -1,98 +1,63 @@
-<template>
-  <section
-    id="contact"
-    ref="sectionRef"
-    class="flex min-h-[300px] flex-col items-center justify-center overflow-hidden p-6 font-mono"
-  >
-    <!-- Typed Text -->
-    <div class="relative mb-8 flex h-16 items-center justify-center">
-      <span class="text-4xl font-bold text-neutral-200 md:text-5xl">
-        {{ displayedText }}
-      </span>
-      <span
-        v-if="hasTriggered"
-        class="ml-0.5 inline-block h-10 w-5 bg-current text-neutral-200 md:h-12 md:w-6"
-      ></span>
-    </div>
+<script setup lang="ts">
+import gsap from "gsap";
 
-    <!-- Contact Buttons -->
-    <div
-      class="flex gap-4 transition-all duration-500"
-      :style="{
-        opacity: showButtons ? 1 : 0,
-        transform: showButtons ? 'translateY(0)' : 'translateY(20px)',
-      }"
-    >
-      <a
-        href="https://instagram.com/reism19"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-800 px-4 py-2 text-sm font-medium text-gray-300 transition-all hover:border-pink-500/50 hover:bg-gray-700 hover:text-white"
-      >
-        <Icon name="mdi:instagram" size="20" />
-      </a>
-      <a
-        href="https://linkedin.com/in/reis-t-mcmillan"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-800 px-4 py-2 text-sm font-medium text-gray-300 transition-all hover:border-blue-500/50 hover:bg-gray-700 hover:text-white"
-      >
-        <Icon name="mdi:linkedin" size="20" />
-      </a>
-      <a
-        href="mailto:reismcmillan19@gmail.com"
-        class="flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-800 px-4 py-2 text-sm font-medium text-gray-300 transition-all hover:border-green-500/50 hover:bg-gray-700 hover:text-white"
-      >
-        <Icon name="mdi:email-outline" size="20" />
-      </a>
-    </div>
-  </section>
-</template>
+const headingRef = ref<HTMLElement | null>(null);
+const linkRef = ref<HTMLElement | null>(null);
 
-<script setup>
-const sectionRef = ref(null);
-const displayedText = ref("");
-const showButtons = ref(false);
-const hasTriggered = ref(false);
-
-const text = "Contact Me?";
-const typeSpeed = 150;
-
-function triggerAnimation() {
-  if (hasTriggered.value) return;
-  hasTriggered.value = true;
-
-  let i = 0;
-  const timer = setInterval(() => {
-    if (i < text.length) {
-      displayedText.value += text.charAt(i);
-      i++;
-    } else {
-      clearInterval(timer);
-      showButtons.value = true;
-    }
-  }, typeSpeed);
-}
+let revealTween: gsap.core.Tween | null = null;
 
 onMounted(() => {
   if (import.meta.server) return;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          triggerAnimation();
-          observer.disconnect();
-        }
-      });
-    },
-    {
-      threshold: 0.3,
-    }
-  );
+  gsap.set([headingRef.value, linkRef.value], { y: 10, autoAlpha: 0 });
 
-  if (sectionRef.value) {
-    observer.observe(sectionRef.value);
-  }
+  revealTween = gsap.to([headingRef.value, linkRef.value], {
+    y: 0,
+    autoAlpha: 1,
+    duration: 0.5,
+    ease: "power3.out",
+    stagger: 0.15,
+    scrollTrigger: {
+      trigger: document.documentElement,
+      start: "85% top",
+      toggleActions: "play none none reverse",
+    },
+  });
+});
+
+onBeforeUnmount(() => {
+  revealTween?.scrollTrigger?.kill();
+  revealTween?.kill();
+  revealTween = null;
 });
 </script>
+
+<template>
+  <section
+    class="pointer-events-none fixed inset-0 z-10 flex flex-col items-center justify-center gap-8 px-6"
+  >
+    <h2
+      ref="headingRef"
+      class="text-5xl font-thin tracking-tight text-[#F2F4F3] sm:text-6xl"
+    >
+      Want to reach out?
+    </h2>
+    <div ref="linkRef" class="pointer-events-auto">
+      <NuxtLink
+        to="/contact"
+        class="glass-pane interactive contact-button inline-flex items-center gap-2 text-sm tracking-wider text-[#DD6031] uppercase"
+        :style="{ '--tint-color': '#DD6031' }"
+      >
+        Get in touch
+        <Icon name="lucide:arrow-right" size="16" />
+      </NuxtLink>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.contact-button {
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.5rem;
+}
+</style>
