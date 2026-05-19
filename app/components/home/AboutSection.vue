@@ -32,10 +32,14 @@ const TITLE_FADE_DURATION = 0.6;
 const asymptoteDone = useState("asymptote-done", () => false);
 let stopAsymptoteWatch: (() => void) | null = null;
 
+const { stop: stopLenis, start: startLenis } = useLenis();
+
 function startReveal() {
+  stopLenis();
   gsap.to([titleBlock.value, scrollHintEl.value], {
     autoAlpha: 1,
     duration: 0.5,
+    onComplete: () => startLenis(),
   });
 
   revealTimeline = gsap.timeline({
@@ -82,6 +86,8 @@ onMounted(() => {
   if (import.meta.server) return;
   if (wordRefs.value.length === 0) return;
 
+  stopLenis();
+
   wordRefs.value.forEach((el) => {
     const x = (Math.random() - 0.5) * RANDOM_OFFSET_RANGE;
     gsap.set(el, { x, autoAlpha: 0 });
@@ -123,7 +129,7 @@ onBeforeUnmount(() => {
       ref="titleBlock"
       class="pointer-events-none absolute inset-y-0 left-0 flex w-full flex-col items-center justify-center sm:w-2/3"
     >
-      <div class="glass-pane flex flex-col items-center">
+      <div class="glass-pane flex flex-col items-center text-center">
         <h2
           class="text-6xl font-bold tracking-tight text-[#F2F4F3] sm:text-7xl"
         >

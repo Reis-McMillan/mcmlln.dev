@@ -29,8 +29,8 @@ const SPHERE_LOOK = new THREE.Vector3(-60, 0, 0);
 
 const END_CAMERA_MOBILE = new THREE.Vector3(30, 40, 70);
 const END_LOOK_MOBILE = new THREE.Vector3(30, 30, 0);
-const SPHERE_CAMERA_MOBILE = new THREE.Vector3(0, 20, 340);
-const SPHERE_LOOK_MOBILE = new THREE.Vector3(0, 20, 0);
+const SPHERE_CAMERA_MOBILE = new THREE.Vector3(0, 50, 320);
+const SPHERE_LOOK_MOBILE = new THREE.Vector3(0, 50, 0);
 const SHRINK_CAMERA_MOBILE = new THREE.Vector3(0, 0, 340);
 const SHRINK_LOOK_MOBILE = new THREE.Vector3(0, 0, 0);
 const UNFURL_CAMERA_MOBILE = new THREE.Vector3(0, 100, 320);
@@ -73,6 +73,7 @@ const AXES_LENGTH = 100;
 
 const canvasContainer = ref<HTMLDivElement | null>(null);
 const faded = ref(false);
+const isMobile = useIsMobile();
 
 let renderer: THREE.WebGLRenderer | null = null;
 let composer: EffectComposer | null = null;
@@ -287,25 +288,30 @@ onMounted(() => {
   const dotPlane = new THREE.Points(geometry, material);
   scene.add(dotPlane);
 
-  sunGeometry = new THREE.SphereGeometry(1, 32, 32);
-  sunMaterial = new THREE.MeshBasicMaterial({
-    color: "0xffffff",
-    fog: false,
-  });
-  const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
-  sunMesh.scale.setScalar(0);
-  sunMesh.position.set(0, 0, 0);
-  scene.add(sunMesh);
+  let sunMesh: THREE.Mesh | null = null;
+  if (!isMobile.value) {
+    sunGeometry = new THREE.SphereGeometry(1, 32, 32);
+    sunMaterial = new THREE.MeshBasicMaterial({
+      color: "0xffffff",
+      fog: false,
+    });
+    sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
+    sunMesh.scale.setScalar(0);
+    sunMesh.position.set(0, 0, 0);
+    scene.add(sunMesh);
+  }
 
   composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(width, height),
-    0,
-    BLOOM_RADIUS,
-    BLOOM_THRESHOLD
-  );
-  composer.addPass(bloomPass);
+  if (!isMobile.value) {
+    bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(width, height),
+      0,
+      BLOOM_RADIUS,
+      BLOOM_THRESHOLD
+    );
+    composer.addPass(bloomPass);
+  }
 
   const state = {
     morphPhase: 0,
@@ -511,18 +517,20 @@ onMounted(() => {
     sceneSync.sphereCenter.set(dotPlane.position.x, 0, 0);
     material!.opacity = state.dotOpacity;
 
-    sunMesh.scale.setScalar(state.sunScale * SUN_MAX_SIZE);
-    bloomPass!.strength = state.sunScale * BLOOM_STRENGTH;
+    if (sunMesh && bloomPass) {
+      sunMesh.scale.setScalar(state.sunScale * SUN_MAX_SIZE);
+      bloomPass.strength = state.sunScale * BLOOM_STRENGTH;
 
-    const sunX =
-      SUN_START_X * state.sunOffsetT +
-      (SUN_END_X - SUN_START_X) * state.sunPositionT;
-    const sunY = ARC_HEIGHT * Math.sin(state.sunPositionT * Math.PI);
-    sunMesh.position.set(sunX, sunY, 0);
+      const sunX =
+        SUN_START_X * state.sunOffsetT +
+        (SUN_END_X - SUN_START_X) * state.sunPositionT;
+      const sunY = ARC_HEIGHT * Math.sin(state.sunPositionT * Math.PI);
+      sunMesh.position.set(sunX, sunY, 0);
 
-    sunProjVec.copy(sunMesh.position).project(camera);
-    sceneSync.sunScreenX = (sunProjVec.x + 1) * 0.5 * window.innerWidth;
-    sceneSync.sunScreenY = (-sunProjVec.y + 1) * 0.5 * window.innerHeight;
+      sunProjVec.copy(sunMesh.position).project(camera);
+      sceneSync.sunScreenX = (sunProjVec.x + 1) * 0.5 * window.innerWidth;
+      sceneSync.sunScreenY = (-sunProjVec.y + 1) * 0.5 * window.innerHeight;
+    }
 
     composer!.render();
     rafId = requestAnimationFrame(animate);
@@ -531,7 +539,7 @@ onMounted(() => {
   rafId = requestAnimationFrame(animate);
 
   resizeHandler = () => {
-    if (!renderer || !composer || !bloomPass) return;
+    if (!renderer || !composer) return;
     width = window.innerWidth;
     height = window.innerHeight;
     if (width === 0 || height === 0) return;
@@ -539,7 +547,7 @@ onMounted(() => {
     camera.updateProjectionMatrix();
     renderer.setSize(width, height, false);
     composer.setSize(width, height);
-    bloomPass.setSize(width, height);
+    bloomPass?.setSize(width, height);
   };
   window.addEventListener("resize", resizeHandler);
 });

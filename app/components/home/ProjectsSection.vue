@@ -129,6 +129,7 @@ const titlePaneEl = ref<HTMLElement | null>(null);
 
 const sync = useSceneSync();
 const { getInstance: getLenis } = useLenis();
+const isMobile = useIsMobile();
 
 let revealTimeline: gsap.core.Timeline | null = null;
 let tickerFn: ((time: number) => void) | null = null;
@@ -314,6 +315,7 @@ function handleResize() {
 
 onMounted(() => {
   if (import.meta.server) return;
+  if (isMobile.value) return;
   if (!sectionRoot.value || !panesContainer.value) return;
 
   applyPaneDimensions();
@@ -364,7 +366,57 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+  <section v-if="isMobile" class="projects-section-mobile">
+    <h2
+      class="projects-title-mobile engraved relative inline-block self-start px-3 py-1 text-3xl font-thin before:absolute before:top-0 before:left-0 before:h-3 before:w-3 before:rounded-tl-md before:border-t-2 before:border-l-2 before:border-[#DD6031] before:content-[''] after:absolute after:right-0 after:bottom-0 after:h-3 after:w-3 after:rounded-br-md after:border-r-2 after:border-b-2 after:border-[#DD6031] after:content-['']"
+    >
+      My Projects
+    </h2>
+    <article
+      v-for="project in projects"
+      :key="project.title"
+      class="glass-pane project-card-mobile"
+      :style="{ '--tint-color': project.tint }"
+    >
+      <h3 class="engraved mb-3 text-xl font-bold">{{ project.title }}</h3>
+      <p class="engraved mb-4 text-sm leading-relaxed">
+        {{ project.description }}
+      </p>
+      <div class="mb-4 flex flex-wrap gap-2">
+        <span
+          v-for="t in project.tech"
+          :key="t"
+          class="engraved rounded border border-white/10 px-2 py-1 text-[10px] tracking-wider uppercase"
+        >
+          {{ t }}
+        </span>
+      </div>
+      <div class="card-actions">
+        <a
+          v-if="project.link"
+          :href="project.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="icon-button engraved"
+          :title="`${project.title} — project link`"
+        >
+          <Icon name="lucide:external-link" size="18" />
+        </a>
+        <a
+          v-if="project.github"
+          :href="project.github"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="icon-button engraved"
+          :title="`${project.title} — GitHub`"
+        >
+          <Icon name="lucide:github" size="18" />
+        </a>
+      </div>
+    </article>
+  </section>
   <section
+    v-else
     ref="sectionRoot"
     class="pointer-events-none fixed inset-0 z-10 overflow-hidden"
   >
@@ -475,5 +527,32 @@ onBeforeUnmount(() => {
   background: var(--tint-color, #fff);
   opacity: 0;
   filter: blur(40px);
+}
+
+.projects-section-mobile {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 4rem 1.25rem 2rem;
+}
+
+.projects-title-mobile {
+  margin-bottom: 0.5rem;
+}
+
+.project-card-mobile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
 }
 </style>

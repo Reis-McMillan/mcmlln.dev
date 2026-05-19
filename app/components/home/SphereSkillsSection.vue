@@ -328,7 +328,10 @@ onBeforeUnmount(() => {
 
 <template>
   <section class="pointer-events-none fixed inset-0 z-10">
-    <div ref="titleEl" class="absolute top-12 left-12 z-20 w-96">
+    <div
+      ref="titleEl"
+      class="absolute top-12 left-1/2 z-20 w-[calc(100%-3rem)] max-w-96 -translate-x-1/2 sm:left-12 sm:w-96 sm:max-w-none sm:translate-x-0"
+    >
       <div ref="titlePaneEl" class="glass-pane opacity-0">
         <h2
           class="engraved relative mb-2 inline-block px-3 py-1 text-4xl font-thin before:absolute before:top-0 before:left-0 before:h-3 before:w-3 before:rounded-tl-md before:border-t-2 before:border-l-2 before:border-[#DD6031] before:content-[''] after:absolute after:right-0 after:bottom-0 after:h-3 after:w-3 after:rounded-br-md after:border-r-2 after:border-b-2 after:border-[#DD6031] after:content-['']"
