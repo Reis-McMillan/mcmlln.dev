@@ -1,6 +1,8 @@
-<script lang="ts" setup>
-useHead({
-  title: "About — Reis McMillan",
+<script setup lang="ts">
+definePageMeta({
+  seoTitle: "About — Reis McMillan",
+  seoDescription:
+    "Triple-major data scientist turned engineer. The story of how I got from notebooks to production systems — and the books, music, and travel along the way.",
 });
 
 const TITLE_CHARS = Array.from("About");

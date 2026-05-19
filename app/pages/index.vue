@@ -1,4 +1,10 @@
 <script setup lang="ts">
+definePageMeta({
+  seoTitle: "Reis McMillan — AI & ML Engineer",
+  seoDescription:
+    "AI & ML engineer building intelligent software at the intersection of data, math, and design. Portfolio of LLM systems, cloud infrastructure, and full-stack work.",
+});
+
 const AI_ML_SKILLS = [
   {
     name: "Python",

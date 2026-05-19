@@ -1,6 +1,8 @@
-<script lang="ts" setup>
-useHead({
-  title: "Resume — Reis McMillan",
+<script setup lang="ts">
+definePageMeta({
+  seoTitle: "Resume — Reis McMillan",
+  seoDescription:
+    "Resume of Reis McMillan — software, AI, and ML engineer. Experience at Concrete Engine, Land O'Lakes, and Keystone Cooperative. Purdue Data Science, Statistics, and Mathematics.",
 });
 
 const TITLE_CHARS = Array.from("Résumé");

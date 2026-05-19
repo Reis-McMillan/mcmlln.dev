@@ -1,5 +1,3 @@
-import { onMounted, onBeforeUnmount } from "vue";
-
 interface UseRevealOptions {
   selector?: string;
   rootMargin?: string;

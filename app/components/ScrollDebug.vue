@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 const { scrollPxToUnits } = useScrollUnits();
 
 const scrollY = ref(0);

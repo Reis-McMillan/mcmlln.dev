@@ -1,6 +1,8 @@
-<script lang="ts" setup>
-useHead({
-  title: "Contact — Reis McMillan",
+<script setup lang="ts">
+definePageMeta({
+  seoTitle: "Contact — Reis McMillan",
+  seoDescription:
+    "Get in touch with Reis McMillan. Send a message about a project, role, or idea you'd like to discuss.",
 });
 
 const TITLE_CHARS = Array.from("Contact");

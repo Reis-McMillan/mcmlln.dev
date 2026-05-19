@@ -8,9 +8,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   modules: [
     "@nuxt/eslint",
-    "reka-ui/nuxt",
     "@nuxt/icon",
-    "@nuxt/image",
     "@nuxt/fonts",
     "nuxt-security",
     "@vueuse/nuxt",
@@ -31,23 +29,19 @@ export default defineNuxtConfig({
       },
     },
   },
-  image: {
-    quality: 80,
-    format: ["webp"],
-  },
   app: {
     head: {
-      title: "Reis McMillan",
-      titleTemplate: "%s - Reis McMillan",
+      htmlAttrs: { lang: "en" },
       link: [
         {
           rel: "icon",
           href: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%2318181b%22 width=%22100%22 height=%22100%22 rx=%228%22/><text x=%2250%22 y=%2272%22 font-family=%22monospace%22 font-size=%2270%22 font-weight=%22bold%22 fill=%22%2322c55e%22 text-anchor=%22middle%22>r</text></svg>",
         },
       ],
-    },
-    rootAttrs: {
-      "data-vaul-drawer-wrapper": "",
+      meta: [
+        { name: "author", content: "Reis McMillan" },
+        { name: "theme-color", content: "#DD6031" },
+      ],
     },
   },
   runtimeConfig: {
@@ -56,6 +50,7 @@ export default defineNuxtConfig({
     contactToEmail: process.env.CONTACT_TO_EMAIL ?? "",
     contactFromEmail: process.env.CONTACT_FROM_EMAIL ?? "",
     public: {
+      siteUrl: "https://mcmlln.dev",
       buildAt: new Date().toLocaleString("en-US", {
         timeZone: "America/New_York",
       }),

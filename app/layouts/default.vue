@@ -24,9 +24,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from "vue";
-
+<script setup lang="ts">
 const isLoaded = ref(false);
 const showWave = ref(false);
 const route = useRoute();
@@ -49,7 +47,7 @@ onUnmounted(() => {
   z-index: 40;
   pointer-events: none;
   backdrop-filter: blur(0);
-  transition: backdrop-filter 320ms ease-out;
+  transition: backdrop-filter var(--duration-base) ease-out;
 }
 
 .blur-overlay.active {
