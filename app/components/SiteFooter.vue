@@ -80,7 +80,7 @@ onBeforeUnmount(() => {
       <span class="text">Find me on</span>
       <span class="rule rule-long" />
       <a
-        href="https://www.linkedin.com/in/reis-mcmillan/"
+        href="https://www.linkedin.com/in/reis-t-mcmillan/"
         target="_blank"
         rel="noopener noreferrer"
         class="text text--icon"

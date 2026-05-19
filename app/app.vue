@@ -57,7 +57,7 @@ useHead({
         },
         sameAs: [
           "https://github.com/Reis-McMillan",
-          "https://www.linkedin.com/in/reis-mcmillan/",
+          "https://www.linkedin.com/in/reis-t-mcmillan/",
         ],
       }),
     },
