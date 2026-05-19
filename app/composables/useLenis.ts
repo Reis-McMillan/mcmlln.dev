@@ -20,7 +20,8 @@ export function useLenis() {
     lenisInstance = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 2,
+      wheelMultiplier: 0.6,
+      touchMultiplier: 1,
     });
 
     lenisInstance.on("scroll", ScrollTrigger.update);
