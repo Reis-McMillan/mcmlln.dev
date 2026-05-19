@@ -127,7 +127,7 @@ onBeforeUnmount(() => {
   <section id="about" class="pointer-events-none fixed inset-0 z-10">
     <div
       ref="titleBlock"
-      class="pointer-events-none absolute inset-y-0 left-0 flex w-full flex-col items-center justify-center sm:w-2/3"
+      class="pointer-events-none absolute inset-y-0 left-0 flex w-full flex-col items-center justify-center px-16 sm:w-2/3 sm:px-0"
     >
       <div class="glass-pane flex flex-col items-center text-center">
         <h2
